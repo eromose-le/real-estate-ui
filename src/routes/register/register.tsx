@@ -1,8 +1,8 @@
 import "./register.scss";
 import { Link, useNavigate } from "react-router-dom";
 import { FormEvent, useState } from "react";
-import apiRequest from "../../lib/apiRequest";
-import { routeEnum } from "../../constants/RouteConstants";
+import apiRequest from "@/lib/apiRequest";
+import { routeEnum } from "@/constants/RouteConstants";
 
 function Register() {
   const [error, setError] = useState("");

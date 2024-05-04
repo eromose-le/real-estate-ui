@@ -1,8 +1,8 @@
 import { useState } from "react";
 import "./navbar.scss";
 import { Link } from "react-router-dom";
-import useAuthUser from "../../hooks/useAuthUser";
-import UserAvatar from "../common/UserAvatar";
+import useAuthUser from "@/hooks/useAuthUser";
+import UserAvatar from "@/common/UserAvatar";
 
 function Navbar() {
   const user = useAuthUser();

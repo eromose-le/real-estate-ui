@@ -1,9 +1,9 @@
-import Chat from "../../components/chat/Chat";
-import List from "../../components/list/List";
+import Chat from "@/components/chat/Chat";
+import List from "@/components/list/List";
 import "./profilePage.scss";
-import useAuthUser from "../../hooks/useAuthUser";
-import useLogout from "../../hooks/useLogout";
-import UserAvatar from "../../components/common/UserAvatar";
+import useAuthUser from "@/hooks/useAuthUser";
+import useLogout from "@/hooks/useLogout";
+import UserAvatar from "@/common/UserAvatar";
 
 function ProfilePage() {
   const user = useAuthUser();
