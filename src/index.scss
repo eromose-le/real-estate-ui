@@ -1,4 +1,4 @@
-*{
+* {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
@@ -9,7 +9,27 @@ a {
   color: inherit;
 }
 
-body{
+body {
   font-family: "Lato", sans-serif;
   overflow: hidden;
+}
+
+#loading-indicator {
+  width: 10px;
+  height: 10px;
+  border: 2px solid currentColor;
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  animation: loading-indicator-animation 1s linear infinite;
+}
+
+@keyframes loading-indicator-animation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }

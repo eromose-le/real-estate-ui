@@ -1,16 +1,54 @@
+import { FormEvent, useContext, useState } from "react";
 import "./login.scss";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import apiRequest from "../../lib/apiRequest";
+import { AuthContext } from "../../context/AuthContext";
+import { routeEnum } from "../../constants/RouteConstants";
 
 function Login() {
+  const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
+  const { updateUser } = useContext(AuthContext);
+
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsLoading(true);
+    setError("");
+    const formData = new FormData(e.target as HTMLFormElement);
+
+    const username = formData.get("username");
+    const password = formData.get("password");
+
+    try {
+      const res = await apiRequest.post("/auth/login", {
+        username,
+        password,
+      });
+
+      updateUser(res?.data?.data);
+
+      navigate(routeEnum.HOME);
+    } catch (err: any) {
+      setError(err?.response?.data?.error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
   return (
     <div className="login">
       <div className="formContainer">
-        <form>
+        <form onSubmit={handleSubmit}>
           <h1>Welcome back</h1>
           <input name="username" type="text" placeholder="Username" />
           <input name="password" type="password" placeholder="Password" />
-          <button>Login</button>
-          <Link to="/register">{"Don't"} you have an account?</Link>
+          <button disabled={isLoading}>
+            Login {isLoading && <span id="loading-indicator"></span>}
+          </button>
+          {error && <span>{error}</span>}
+          <Link to={routeEnum.REGISTER}>{"Don't"} you have an account?</Link>
         </form>
       </div>
       <div className="imgContainer">

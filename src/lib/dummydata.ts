@@ -1,4 +1,4 @@
-import { Property } from "@/types/property";
+import { Property, PropertyDetails } from "@/types/property";
 
 export const listData: Property[] = [
   {
@@ -91,7 +91,7 @@ export const listData: Property[] = [
   },
 ];
 
-export const singlePostData = {
+export const singlePostData: PropertyDetails = {
   id: 1,
   title: "Beautiful Apartment",
   price: 1200,
