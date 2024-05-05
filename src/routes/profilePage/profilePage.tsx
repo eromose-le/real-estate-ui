@@ -20,7 +20,6 @@ function ProfilePage() {
       value: (
         <UserAvatar username={username} imageUrl={avatar} alt="profile-image" />
       ),
-      // value: <img src={avatar} alt="" />,
     },
     {
       id: 2,

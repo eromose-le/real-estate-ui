@@ -1,18 +1,38 @@
 import "./layout.scss";
-import Navbar from "@/components/navbar/Navbar"
-import { Outlet } from "react-router-dom";
+import Navbar from "@/components/navbar/Navbar";
+import { routeEnum } from "@/constants/RouteConstants";
+import useAuthUser from "@/hooks/useAuthUser";
+import { Navigate, Outlet } from "react-router-dom";
 
-function Layout() {
+function PublicRoutesLayout() {
   return (
     <div className="layout">
       <div className="navbar">
         <Navbar />
       </div>
       <div className="content">
-        <Outlet/>
+        <Outlet />
       </div>
     </div>
   );
 }
 
-export default Layout;
+function ProtectRoutesLayout() {
+  const user = useAuthUser();
+
+  if (!user) return <Navigate to={routeEnum.LOGIN} />;
+  else {
+    return (
+      <div className="layout">
+        <div className="navbar">
+          <Navbar />
+        </div>
+        <div className="content">
+          <Outlet />
+        </div>
+      </div>
+    );
+  }
+}
+
+export { PublicRoutesLayout, ProtectRoutesLayout };
