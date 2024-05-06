@@ -1,0 +1,91 @@
+@import "../responsive.scss";
+
+.errorDialogContainer {
+  background-color: #fbfbfb;
+  height: 90vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.errorDialog {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 50%;
+  height: 40vh;
+  margin: auto;
+  padding: 20px;
+  border: 2px solid #fcf5f3;
+
+  h1 {
+    text-align: center;
+    font-size: 24px;
+  }
+
+  p {
+    font-style: 16px;
+  }
+
+  .errorDescription {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .actionContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    gap: 10px;
+    padding: 15px;
+
+    button {
+      padding: 10px 15px;
+      width: 100%;
+      border-radius: 5px;
+      border: none;
+      background-color: teal;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      max-width: 200px;
+    }
+  }
+
+  @include sm {
+    min-width: 90%;
+  }
+}
+
+.errorDialogDefault {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  text-align: center;
+  padding: 0px 20px;
+
+  button {
+    max-width: fit-content;
+    padding: 10px 15px;
+    align-self: center;
+    border: none;
+    border-radius: 5px;
+    border: none;
+    color: #5d5d5d;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  p {
+    color: grey;
+    font-size: 16px !important;
+    align-self: center;
+  }
+}
