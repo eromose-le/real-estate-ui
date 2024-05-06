@@ -23,7 +23,7 @@ function useLogout(): LogoutProps {
     try {
       await apiRequest.post("/auth/logout");
       updateUser(null);
-      navigate(routeEnum.HOME);
+      navigate(routeEnum.LOGIN);
     } catch (err) {
       setIsError(true);
       console.log(err);
