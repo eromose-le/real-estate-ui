@@ -8,6 +8,8 @@ interface UserAvatarProps {
   [key: string]: any; // Allow any other additional props
 }
 
+const avatarUrlSource = `https://ui-avatars.com/api/?background=00A2CA&color=fff&name=`;
+
 const UserAvatar: React.FC<UserAvatarProps> = ({
   className,
   username,
@@ -15,11 +17,8 @@ const UserAvatar: React.FC<UserAvatarProps> = ({
   imageUrl,
   ...restProps
 }) => {
-  
   const dynamicImageUrl = username
-    ? `https://avatar.iran.liara.run/username?username=${encodeURIComponent(
-        username
-      )}`
+    ? `${avatarUrlSource}${encodeURIComponent(username)}`
     : "";
 
   return (
