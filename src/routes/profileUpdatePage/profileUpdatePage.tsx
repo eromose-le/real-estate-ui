@@ -8,13 +8,15 @@ import UploadWidget, {
 } from "@/components/uploadWidget/UploadWidget";
 import { routeEnum } from "@/constants/RouteConstants";
 import useAuthUser from "@/hooks/useAuthUser";
+import LoadingButton from "@/common/LoadingButton";
 
 function ProfileUpdatePage() {
   const user = useAuthUser();
   const { updateUser } = useContext(AuthContext);
   const [error, setError] = useState<string>("");
+  const [isLoading, setIsLoading] = useState(false);
   const [avatar, setAvatar] = useState<string[]>([]);
-  const { loaded } = useContext(CloudinaryScriptContext);
+  useContext(CloudinaryScriptContext);
 
   const navigate = useNavigate();
 
@@ -24,8 +26,8 @@ function ProfileUpdatePage() {
 
     const { username, email, password } = Object.fromEntries(formData);
 
-    console.log("PAYLOADS", avatar[0]);
     try {
+      setIsLoading(true);
       const res = await apiRequest.put(`/users/${user?.id}`, {
         username,
         email,
@@ -33,11 +35,14 @@ function ProfileUpdatePage() {
         avatar: avatar[0],
       });
 
-      updateUser(res?.data?.data);
+      setIsLoading(false);
+      updateUser(res?.data);
       navigate(routeEnum.PROFILE);
     } catch (err: any) {
       console.log(err);
       setError(err?.response?.data?.error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -52,6 +57,7 @@ function ProfileUpdatePage() {
               id="username"
               name="username"
               type="text"
+              disabled
               defaultValue={user?.username}
             />
           </div>
@@ -61,16 +67,30 @@ function ProfileUpdatePage() {
               id="email"
               name="email"
               type="email"
+              disabled
               defaultValue={user?.email}
             />
           </div>
           <div className="item">
             <label htmlFor="password">Password</label>
-            <input id="password" name="password" type="password" />
+            <input
+              id="password"
+              name="password"
+              type="password"
+              placeholder="******"
+            />
           </div>
-          <button type="submit" disabled={!loaded}>
-            Update
-          </button>
+          <div className="item">
+            <label htmlFor="password">Confirm Password</label>
+            <input id="password" placeholder="******" />
+          </div>
+
+          <LoadingButton
+            type="submit"
+            isLoading={isLoading}
+            disabled={!avatar || isLoading}
+            buttonText="Update"
+          />
           {error && <span>{error}</span>}
         </form>
       </div>
@@ -89,7 +109,6 @@ function ProfileUpdatePage() {
             folder: "avatars",
           }}
           setState={setAvatar}
-          // setPublicId={undefined}
         />
       </div>
     </div>

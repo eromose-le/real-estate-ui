@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { routeEnum } from "@/constants/RouteConstants";
 import { AuthContext } from "@/context/AuthContext";
 import apiRequest from "@/lib/apiRequest";
+import LoadingButton from "@/common/LoadingButton";
 
 function Login() {
   const [error, setError] = useState("");
@@ -44,9 +45,12 @@ function Login() {
           <h1>Welcome back</h1>
           <input name="username" type="text" placeholder="Username" />
           <input name="password" type="password" placeholder="Password" />
-          <button disabled={isLoading}>
-            Login {isLoading && <span id="loading-indicator"></span>}
-          </button>
+          <LoadingButton
+            type="submit"
+            disabled={isLoading}
+            isLoading={isLoading}
+            buttonText="Login"
+          />
           {error && <span>{error}</span>}
           <Link to={routeEnum.REGISTER}>{"Don't"} you have an account?</Link>
         </form>

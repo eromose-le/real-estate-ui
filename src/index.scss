@@ -33,3 +33,26 @@ body {
     transform: rotate(360deg);
   }
 }
+
+.default-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 20px;
+  border-radius: 5px;
+  border: none;
+  background-color: teal !important;
+  color: white;
+  font-weight: bold !important;
+  cursor: pointer;
+
+  &:disabled {
+    background-color: #bed9d8;
+    cursor: not-allowed;
+  }
+
+  span {
+    color: white;
+  }
+}

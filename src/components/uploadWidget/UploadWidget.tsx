@@ -5,6 +5,7 @@ import React, {
   useRef,
   useCallback,
 } from "react";
+import "../../index.scss";
 
 // Declare cloudinary property on Window interface
 declare global {
@@ -43,6 +44,7 @@ const UploadWidget: React.FC<UploadWidgetProps> = ({ uwConfig, setState }) => {
           if (!error && result && result.event === "success") {
             console.log("Done! Here is the image info: ", result.info);
             setState((prev) => [...prev, result.info.secure_url]);
+            setLoaded(true); // Set loaded to true when image URL is generated
           }
         }
       );
@@ -77,7 +79,7 @@ const UploadWidget: React.FC<UploadWidgetProps> = ({ uwConfig, setState }) => {
       <button
         ref={uploadButtonRef}
         id="upload_widget"
-        className="cloudinary-button"
+        className="cloudinary-button default-button"
       >
         Upload
       </button>

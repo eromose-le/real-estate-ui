@@ -26,6 +26,10 @@
           padding: 20px;
           border-radius: 5px;
           border: 1px solid gray;
+
+          &:disabled {
+            cursor: not-allowed;
+          }
         }
       }
       button {
@@ -41,7 +45,7 @@
   }
 
   .sideContainer {
-    flex: 1;
+    flex: 2;
     background-color: #fcf5f3;
     display: flex;
     flex-direction: column;
@@ -53,12 +57,15 @@
       width: 50%;
       object-fit: cover;
     }
+
+    @include sm {
+      flex: 1;
+    }
   }
 
   @include sm {
     display: flex;
     flex-direction: column-reverse;
-    // flex-wrap: wrap;
-    // flex: 3;
+    height: 80%;
   }
 }
