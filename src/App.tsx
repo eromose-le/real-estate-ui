@@ -1,12 +1,15 @@
 import { Suspense } from "react";
 import AppLoader from "./common/AppLoader";
 import AppRouter from "./router";
+import LoadingContent from "./common/LoadingContent";
 
 function App() {
   return (
-    <Suspense fallback={<AppLoader />}>
-      <AppRouter />
-    </Suspense>
+    <LoadingContent loading={false} error={false}>
+      <Suspense fallback={<AppLoader />}>
+        <AppRouter />
+      </Suspense>
+    </LoadingContent>
   );
 }
 

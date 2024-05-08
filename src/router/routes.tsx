@@ -4,17 +4,20 @@ import {
   PublicRoutesLayout,
   ProtectRoutesLayout,
 } from "@/routes/layout/layout";
-import ListPage from "@/routes/listPage/listPage";
-import Login from "@/routes/login/login";
-import NewPostPage from "@/routes/newPostPage/newPostPage";
-import ProfilePage from "@/routes/profilePage/profilePage";
-import ProfileUpdatePage from "@/routes/profileUpdatePage/profileUpdatePage";
-import Register from "@/routes/register/register";
-import SinglePage from "@/routes/singlePage/singlePage";
-import { ReactElement } from "react";
+import { ReactElement, lazy } from "react";
 import { Navigate, RouteObject } from "react-router-dom";
 import AuthGuard from "./guard";
 import RootErrorBoundary from "@/common/RootErrorBoundary";
+
+const Login = lazy(() => import("@/routes/login/login"));
+const Register = lazy(() => import("@/routes/register/register"));
+const ListPage = lazy(() => import("@/routes/listPage/listPage"));
+const SinglePage = lazy(() => import("@/routes/singlePage/singlePage"));
+const ProfilePage = lazy(() => import("@/routes/profilePage/profilePage"));
+const ProfileUpdatePage = lazy(
+  () => import("@/routes/profileUpdatePage/profileUpdatePage")
+);
+const NewPostPage = lazy(() => import("@/routes/newPostPage/newPostPage"));
 
 type ExtendedRouteObject = RouteObject & {
   guarded?: boolean;
