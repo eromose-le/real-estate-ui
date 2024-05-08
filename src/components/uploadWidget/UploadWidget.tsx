@@ -6,6 +6,18 @@ import React, {
   useCallback,
 } from "react";
 
+// Declare cloudinary property on Window interface
+declare global {
+  interface Window {
+    cloudinary: {
+      createUploadWidget: (
+        config: any,
+        callback: (error: any, result: any) => void
+      ) => any;
+    };
+  }
+}
+
 interface UploadWidgetProps {
   uwConfig: any;
   setState: React.Dispatch<React.SetStateAction<any[]>>;
