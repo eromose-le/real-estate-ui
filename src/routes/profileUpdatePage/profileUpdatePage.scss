@@ -1,9 +1,11 @@
+@import "../../responsive.scss";
+
 .profileUpdatePage {
   height: 100%;
   display: flex;
 
   .formContainer {
-    flex:3;
+    flex: 3;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -39,7 +41,7 @@
   }
 
   .sideContainer {
-    flex: 2;
+    flex: 1;
     background-color: #fcf5f3;
     display: flex;
     flex-direction: column;
@@ -47,9 +49,16 @@
     align-items: center;
     justify-content: center;
 
-    .avatar{
+    .avatar {
       width: 50%;
       object-fit: cover;
     }
+  }
+
+  @include sm {
+    display: flex;
+    flex-direction: column-reverse;
+    // flex-wrap: wrap;
+    // flex: 3;
   }
 }

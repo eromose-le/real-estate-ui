@@ -4,6 +4,8 @@ import "./profilePage.scss";
 import useAuthUser from "@/hooks/useAuthUser";
 import useLogout from "@/hooks/useLogout";
 import UserAvatar from "@/common/UserAvatar";
+import { Link } from "react-router-dom";
+import { routeEnum } from "@/constants/RouteConstants";
 
 function ProfilePage() {
   const user = useAuthUser();
@@ -39,7 +41,9 @@ function ProfilePage() {
         <div className="wrapper">
           <div className="title">
             <h1>User Information</h1>
-            <button>Update Profile</button>
+            <Link to={routeEnum.PROFILE_UPDATE}>
+              <button>Update Profile</button>
+            </Link>
           </div>
           <div className="info">
             {profileInfo?.map((profile) => (
