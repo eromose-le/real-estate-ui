@@ -5,9 +5,9 @@ import { routeEnum } from "@/constants/RouteConstants";
 import { AuthContext } from "@/context/AuthContext";
 import apiRequest from "@/lib/apiRequest";
 import LoadingButton from "@/common/LoadingButton";
+import { Notify } from "@/common/Notify";
 
 function Login() {
-  const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   const { updateUser } = useContext(AuthContext);
@@ -17,7 +17,6 @@ function Login() {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
-    setError("");
     const formData = new FormData(e.target as HTMLFormElement);
 
     const username = formData.get("username");
@@ -30,10 +29,11 @@ function Login() {
       });
 
       updateUser(res?.data?.data);
-
       navigate(routeEnum.HOME);
+
+      Notify(`${res?.data?.message || "Login successful"}`, "success");
     } catch (err: any) {
-      setError(err?.response?.data?.error);
+      Notify(`${err?.response?.data?.error || "An error occured"}`, "error");
     } finally {
       setIsLoading(false);
     }
@@ -51,7 +51,6 @@ function Login() {
             isLoading={isLoading}
             buttonText="Login"
           />
-          {error && <span>{error}</span>}
           <Link to={routeEnum.REGISTER}>{"Don't"} you have an account?</Link>
         </form>
       </div>

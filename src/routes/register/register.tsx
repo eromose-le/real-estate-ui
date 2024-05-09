@@ -3,16 +3,15 @@ import { Link, useNavigate } from "react-router-dom";
 import { FormEvent, useState } from "react";
 import apiRequest from "@/lib/apiRequest";
 import { routeEnum } from "@/constants/RouteConstants";
+import { Notify } from "@/common/Notify";
 
 function Register() {
-  const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setError("");
     setIsLoading(true);
     const formData = new FormData(e.target as HTMLFormElement);
 
@@ -21,15 +20,17 @@ function Register() {
     const password = formData.get("password") as string;
 
     try {
-      await apiRequest.post("/auth/register", {
+      const res = await apiRequest.post("/auth/register", {
         username,
         email,
         password,
       });
 
       navigate(routeEnum.LOGIN);
+
+      Notify(`${res?.data?.message || "Registeration successful"}`, "success");
     } catch (err: any) {
-      setError(err?.response?.data?.error);
+      Notify(`${err?.response?.data?.error || "An error occured"}`, "error");
     } finally {
       setIsLoading(false);
     }
@@ -43,7 +44,6 @@ function Register() {
           <input name="email" type="text" placeholder="Email" />
           <input name="password" type="password" placeholder="Password" />
           <button disabled={isLoading}>Register</button>
-          {error && <span>{error}</span>}
           <Link to="/login">Do you have an account?</Link>
         </form>
       </div>

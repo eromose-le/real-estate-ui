@@ -6,6 +6,7 @@ import React, {
   useCallback,
 } from "react";
 import "../../index.scss";
+import { Notify } from "@/common/Notify";
 
 // Declare cloudinary property on Window interface
 declare global {
@@ -42,7 +43,7 @@ const UploadWidget: React.FC<UploadWidgetProps> = ({ uwConfig, setState }) => {
         uwConfig,
         (error: any, result: any) => {
           if (!error && result && result.event === "success") {
-            console.log("Done! Here is the image info: ", result.info);
+            Notify("Image uploaded", "success");
             setState((prev) => [...prev, result.info.secure_url]);
             setLoaded(true); // Set loaded to true when image URL is generated
           }

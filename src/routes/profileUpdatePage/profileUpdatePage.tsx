@@ -9,6 +9,7 @@ import UploadWidget, {
 import { routeEnum } from "@/constants/RouteConstants";
 import useAuthUser from "@/hooks/useAuthUser";
 import LoadingButton from "@/common/LoadingButton";
+import { Notify } from "@/common/Notify";
 
 function ProfileUpdatePage() {
   const user = useAuthUser();
@@ -38,6 +39,8 @@ function ProfileUpdatePage() {
       setIsLoading(false);
       updateUser(res?.data);
       navigate(routeEnum.PROFILE);
+
+      Notify(`${res?.data?.message || "Profile Update successful"}`, "success");
     } catch (err: any) {
       console.log(err);
       setError(err?.response?.data?.error);
