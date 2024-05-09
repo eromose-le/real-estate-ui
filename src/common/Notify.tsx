@@ -23,12 +23,12 @@ export const Notify = (
 ): void => {
   const defaultOptions: ToastOptions = {
     position: "top-center",
-    autoClose: 5000,
-    hideProgressBar: false,
+    autoClose: 3000,
+    hideProgressBar: true,
     closeOnClick: true,
     pauseOnHover: true,
     draggable: true,
-    progress: 0,
+    progress: 1,
     theme: "light",
     transition: Slide,
   };

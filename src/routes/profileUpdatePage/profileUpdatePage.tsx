@@ -14,7 +14,6 @@ import { Notify } from "@/common/Notify";
 function ProfileUpdatePage() {
   const user = useAuthUser();
   const { updateUser } = useContext(AuthContext);
-  const [error, setError] = useState<string>("");
   const [isLoading, setIsLoading] = useState(false);
   const [avatar, setAvatar] = useState<string[]>([]);
   useContext(CloudinaryScriptContext);
@@ -42,8 +41,7 @@ function ProfileUpdatePage() {
 
       Notify(`${res?.data?.message || "Profile Update successful"}`, "success");
     } catch (err: any) {
-      console.log(err);
-      setError(err?.response?.data?.error);
+      Notify(`${err?.response?.data?.error || "An error occured"}`, "error");
     } finally {
       setIsLoading(false);
     }
@@ -94,7 +92,6 @@ function ProfileUpdatePage() {
             disabled={!avatar || isLoading}
             buttonText="Update"
           />
-          {error && <span>{error}</span>}
         </form>
       </div>
       <div className="sideContainer">
