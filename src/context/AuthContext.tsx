@@ -24,12 +24,12 @@ export const AuthContextProvider: React.FC<AuthContextProviderProps> = ({
   });
 
   const updateUser = (data: User | null) => {
-    setCurrentUser(data);
+    setCurrentUser(data ?? null);
   };
 
   // Update localStorage when currentUser changes
   useEffect(() => {
-    localStorage.setItem("user", JSON.stringify(currentUser));
+    localStorage.setItem("user", JSON.stringify(currentUser) ?? null);
   }, [currentUser]);
 
   return (

@@ -25,6 +25,7 @@ function useLogout(): LogoutProps {
 
       Notify("Logout successful", "success");
     } catch (err: any) {
+      navigate(routeEnum.LOGIN);
       Notify(`${err?.response?.data?.error || "An error occured"}`, "error");
     } finally {
       setIsLoading(false);

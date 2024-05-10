@@ -1,6 +1,4 @@
 import { Slide, ToastPosition, toast } from "react-toastify";
-// import { toast } from "react-toastify";
-// import { Slide } from "react-toastify/dist/components";
 
 type ToastType = "success" | "error";
 
