@@ -26,7 +26,7 @@ export const Notify = (
     closeOnClick: true,
     pauseOnHover: true,
     draggable: true,
-    progress: 1,
+    progress: 0,
     theme: "light",
     transition: Slide,
   };
